@@ -60,10 +60,16 @@ public:
 private:
 	//·µ»Ø-1´æÔÚ
 	pair<Node*, int> _find(const K& key);
-
+	
 private:
 	Node* _pRoot;
 };
+
+template <typename K, size_t M>
+pair<B_TreeNode<K, size_t M>*, int> B_Tree<K, M>::_find(const K& key)
+{
+	if ()
+}
 
 
 
