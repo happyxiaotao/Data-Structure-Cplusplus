@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-void perm(int* a, int k, int n)
+void perm(int* a, int k, int n) //a表示数组，k表示从下标几开始。n是数组总元素个数
 {
 	if (k == n)
 	{
