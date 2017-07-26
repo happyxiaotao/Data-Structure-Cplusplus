@@ -1,10 +1,11 @@
 /*
 
-м╪спа╫жж╢Ф╢╒пнй╫ё╨
-1ё╛аз╫с╬ьуС
-2ё╛аз╫с╠М
+Е⌡╬Ф°┴Д╦╓Г╖█Е╜≤Е┌╗Е╫╒Е╪▐О╪ 
+1О╪▄И┌╩Ф▌╔Г÷╘И≤╣
+2О╪▄И┌╩Ф▌╔Х║╗
 */
 
+<<<<<<< HEAD
 #ifndef _GRAPHIC_H_
 #define _GRAPHIC_H_
 
@@ -21,4 +22,10 @@ using namespace std;
 
 
 #endif //_GRAPHIC_H_
+=======
 
+#pragma once
+>>>>>>> c5f78ef62321fae9bd504e52f11feed86032dc56
+
+template <typename K>\
+  

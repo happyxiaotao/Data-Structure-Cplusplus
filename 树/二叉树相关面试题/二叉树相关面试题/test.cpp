@@ -69,7 +69,7 @@ void FunTest2()
 	//cout << t1.GetKLevelNode(3) << endl;
 
 	//打印镜像
-	t1.GetBinaryMirror_Nor();
+	//t1.GetBinaryMirror_Nor();
 	//t1.GetBinaryMirror();
 	//t1.PreOrder();
 	//t1.InOrder();
@@ -78,8 +78,33 @@ void FunTest2()
 
 	//判断是否是完全二叉树
 	{
-		char* array3 = "124##5##36";
-		BinaryTree<char> t1(array3, strlen(array1), '#');
-		cout << t1.IsCompleteBinaryTree() << endl;
+		//	char* array3 = "124##5##36";
+		//char *array3 = "124##5##36##7";//是平衡二叉树
+		char *array3 = "124##5"; //不是平衡二叉树
+		BinaryTree<char> t1(array3, strlen(array3), '#');
+
+
+		t1.PreOrder();//前序遍历
+		if (t1.IsBlanceBinaryTree())
+			cout << "是平衡二叉树" << endl;
+		else
+			cout << "不是平衡二叉树" << endl;
+		//cout << t1.IsCompleteBinaryTree() << endl;
 	}
+}
+
+void Test3()
+{
+	size_t a = 10;
+	size_t b = 5;
+
+	int c = a;
+	int d = b;
+
+	if ((b - a) > 0)
+		cout << "无符号运算结果还是无符号" << endl;
+
+
+	if ((d - c) < 0)
+		cout << "无符号强转为有符号后运算结果是有符号" << endl;
 }

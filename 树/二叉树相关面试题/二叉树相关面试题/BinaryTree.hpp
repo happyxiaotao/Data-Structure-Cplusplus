@@ -142,7 +142,16 @@ public:
 	// ÀûÓÃ²ãĞò±éÀúÀ´´¦Àí--> ¹Ø¼ü£ºÕÒµÚÒ»¸ö¶È²»Îª2µÄ½áµã-->ºóĞø½áµã
 	// Èç¹ûÓĞº¢×ÓÔò²»ÊÇÍêÈ«¶ş²æÊ÷
 	// ·ñÔò£ºÊÇ
-	bool IsCompleteBinaryTree();
+	bool IsCompleteBinaryTree()  //ÅĞ¶Ï¶ş²æÊ÷ÊÇ²»ÊÇÍêÈ«¶ş²æÊ÷
+	{
+		return _IsCompleteBinaryTree(m_pRoot);
+	}
+
+	bool IsBlanceBinaryTree()
+	{
+		int depth = 0;  //ÓÃÀ´±£´æÉî¶È£¨×¢Òâ£º²»ÒªÊ¹ÓÃsize_tÀ´±£´æ£¬ÒòÎªºóÃæÎŞ·ûºÅÊı½øĞĞÔËËã£¬½á¹û»¹ÊÇÎŞ·ûºÅÊı£©
+		return _IsBlance(m_pRoot, depth); //×¢Òâ:depthÊÇ´«ÒıÓÃ£¬ÎªÁË±ÜÃâµ÷ÓÃÇó¸ß¶Èº¯Êı£¬Ìá¸ßĞ§ÂÊ
+	}
 
 private:
 	void _CreateTree(Node*& pRoot, const T array[], size_t size, size_t& index, const T& invalid);//´´½¨Ê÷
@@ -173,6 +182,10 @@ private:
 	size_t _GetKLevelNode(Node* pRoot, size_t k);//»ñÈ¡Ä³Ò»²ã½áµã¸öÊı
 
 	void _GetBinaryMirror(Node* pRoot);//µİ¹éÊµÏÖ£º½«¶ş²æÊ÷±äÎªÆä¾µÏñ
+
+	bool _IsCompleteBinaryTree(Node* pRoot); //ÅĞ¶ÏÒ»¿Å¶ş²æÊ÷ÊÇ·ñÊÇÍêÈ«¶ş²æÊ÷
+
+	bool _IsBlance(Node* pRoot, int& depth);  //ÅĞ¶ÏÒ»¿Å¶ş²æÊ÷ÊÇ²»ÊÇÆ½ºâ¶ş²æÊ÷
 
 private:
 	BinaryTreeNode<T>* m_pRoot;//¸ù½áµã
@@ -225,6 +238,8 @@ void BinaryTree<T>::_PreOrder(Node* pRoot)//µİ¹éÊµÏÖ£ºÇ°Ğò±éÀú
 	}
 }
 
+
+//·Çµİ¹éÏÈĞò±éÀúµÄµÚÒ»ÖÖ½â·¨£¬ÏÂÃæ»¹ÓĞµÚ¶şÖÖ
 template <typename T>
 void BinaryTree<T>::_PreOrder_nor(Node* pRoot)//·Çµİ¹éÊµÏÖ£ºÇ°Ğò±éÀú£¨ÀûÓÃÕ»ÊµÏÖ£©
 {
@@ -245,6 +260,32 @@ void BinaryTree<T>::_PreOrder_nor(Node* pRoot)//·Çµİ¹éÊµÏÖ£ºÇ°Ğò±éÀú£¨ÀûÓÃÕ»ÊµÏÖ
 			s.push(pTemp->m_pLeft);
 	}
 }
+/*
+//·Çµİ¹éÏÈĞò±éÀúµÄµÚ¶şÖÖ½â·¨£¬
+//ÕâÖÖ½â·¨Óë·Çµİ¹éÊµÏÖÖĞĞò±éÀú£¬ºóĞò±éÀúµÄË¼ÏëÀàËÆ¡£
+template <typename T>
+void BinaryTree<T>::_PreOrder_nor(Node *pRoot)
+{
+	if (nullptr == pRoot)
+		return;
+
+	stack<Node *> s;
+	Node *pCur = pRoot;
+	while (!s.empty() || pCur)
+	{
+		while (pCur)
+		{
+			cout << pCur->m_data << " ";
+			s.push(pCur);
+			pCur = pCur->m_pLeft;
+		}
+
+		pCur = s.top();
+		s.pop();
+		pCur = pCur->m_pRight;
+	}
+}
+*/
 
 template <typename T>
 void BinaryTree<T>::_InOrder(Node* pRoot)//µİ¹éÊµÏÖ£ºÖĞĞò±éÀú
@@ -495,13 +536,13 @@ void BinaryTree<T>::_GetBinaryMirror(Node* pRoot)	// ½«¶ş²æÊ÷±äÎªÆä¾µÏñ£ºµİ¹é°æ±
 3£¬·ñÔò£¬ÊÇÍêÈ«¶ş²æÊ÷¡£
 */
 template <typename T>
-bool BinaryTree<T>::IsCompleteBinaryTree()
+bool BinaryTree<T>::_IsCompleteBinaryTree(Node* pRoot)
 {
-	if (nullptr == m_pRoot)
+	if (nullptr == pRoot)
 		return true;//¿ÕÊ÷Ò²ÊÇÍêÈ«¶ş²æÊ÷
 
 	queue<Node*> q;
-	Node* pCur = m_pRoot;
+	Node* pCur = pRoot;
 	q.push(pCur);
 	bool flag = false;//flag±íÊ¾ÊÇ·ñÕÒµ½ÁËÂú×ãÌõ¼şµÄ½Úµã
 
@@ -528,6 +569,31 @@ bool BinaryTree<T>::IsCompleteBinaryTree()
 	}
 
 	return true;//±éÀú¶ş²æÊ÷¹ı³ÌÖĞ£¬Ã»ÓĞÌáÇ°ÍË³ö£¬±íÊ¾ÊÇÒ»¸öÍêÈ«¶ş²æÊ÷
+}
+
+//ÅĞ¶ÏÒ»¿Å¶ş²æÊ÷ÊÇ·ñÊÇÆ½ºâ¶ş²æÊ÷
+template <typename T>
+bool BinaryTree<T>::_IsBlance(Node* pRoot, int& depth)
+{
+	if (nullptr == pRoot) //¿ÕÊ÷
+	{
+		depth = 0;
+		return true;
+	}
+
+	int d_left = 0;  //×ó×ÓÊ÷Éî¶È
+	int d_right = 0;	//ÓÒ×ÓÊ÷Éî¶È
+	if (_IsBlance(pRoot->m_pLeft, d_left) && _IsBlance(pRoot->m_pRight, d_right))
+	{
+		int diff = d_left - d_right;
+		if (diff >= -1 && diff <= 1) //Âú×ã×óÓÒ×ÓÊ÷¸ß¶ÈÏà²î²»´óÓÚ1
+		{
+			depth = d_left > d_right ? d_left + 1 : d_right + 1;
+			return true;
+		}
+	}
+
+	return false;	//Ã»ÓĞÂú×ãÉÏÊöÒªÇóµÄÇé¿ö
 }
 
 #endif //_BINARYTREE_H_
